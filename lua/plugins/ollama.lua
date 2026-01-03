@@ -1,0 +1,21 @@
+return {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   build = "make",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   opts = {
+  --     provider = "ollama",
+  --     providers = {
+  --       ollama = {
+  --         endpoint = "http://localhost:11434",
+  --         model = "phi3:latest",
+  --         timeout = 60000,
+  --         stream = false,
+  --       },
+  --     },
+  --   },
+}
