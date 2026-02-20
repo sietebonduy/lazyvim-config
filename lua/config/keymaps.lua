@@ -7,6 +7,9 @@ vim.keymap.set("n", "<leader>cp", function()
   vim.fn.setreg("+", path)
 end, { desc = "Copy relative file path" })
 
+vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#f49586" })
+vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = "#f49586" })
+
 -- vim.keymap.set("n", "<leader>cp", function()
 --   local root = vim.fn.system("git rev-parse --show-toplevel"):gsub("\n", "")
 --   local file = vim.fn.expand("%:p")

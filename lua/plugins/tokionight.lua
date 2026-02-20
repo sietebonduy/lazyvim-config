@@ -1,37 +1,37 @@
 return {
-  "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
-  opts = {
-    style = "night", -- night | storm | moon | day
-    transparent = true, -- прозрачность
-    terminal_colors = true,
-    styles = {
-      comments = { italic = true },
-      keywords = { italic = true },
-      functions = {},
-      variables = {},
-    },
-  },
-  config = function(_, opts)
-    require("tokyonight").setup(opts)
-    vim.cmd.colorscheme("tokyonight")
-
-    -- Текущая строка
-    vim.cmd([[
-      highlight CursorLine guibg=#1f2335
-      highlight CursorLineNr guifg=#7aa2f7 gui=bold
-    ]])
-
-    -- Visual mode
-    vim.cmd([[
-      highlight Visual guibg=#33467c guifg=NONE
-    ]])
-
-    -- Поиск
-    vim.cmd([[
-      highlight Search guibg=#3d59a1 guifg=#ffffff
-      highlight IncSearch guibg=#7aa2f7 guifg=#000000
-    ]])
-  end,
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     style = "night", -- night | storm | moon | day
+  --     transparent = true, -- прозрачность
+  --     terminal_colors = true,
+  --     styles = {
+  --       comments = { italic = true },
+  --       keywords = { italic = true },
+  --       functions = {},
+  --       variables = {},
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("tokyonight").setup(opts)
+  --     vim.cmd.colorscheme("tokyonight")
+  --
+  --     -- Текущая строка
+  --     vim.cmd([[
+  --       highlight CursorLine guibg=#1f2335
+  --       highlight CursorLineNr guifg=#7aa2f7 gui=bold
+  --     ]])
+  --
+  --     -- Visual mode
+  --     vim.cmd([[
+  --       highlight Visual guibg=#33467c guifg=NONE
+  --     ]])
+  --
+  --     -- Поиск
+  --     vim.cmd([[
+  --       highlight Search guibg=#3d59a1 guifg=#ffffff
+  --       highlight IncSearch guibg=#7aa2f7 guifg=#000000
+  --     ]])
+  --   end,
 }
