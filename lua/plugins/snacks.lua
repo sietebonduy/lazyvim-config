@@ -21,5 +21,7 @@ return {
     opts.terminal.win = vim.tbl_deep_extend("force", opts.terminal.win or {}, {
       style = "terminal",
     })
+
+    opts.animate = opts.animate or {}
   end,
 }
