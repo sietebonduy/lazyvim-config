@@ -42,6 +42,22 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitle", { fg = border_fg, bg = border_bg })
 
+  -- Snacks windows/terminal accents
+  vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksWinSeparator", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksTitle", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksFooter", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksWinBar", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksWinBarNC", { fg = border_fg, bg = border_bg })
+
+  -- Snacks picker input
+  vim.api.nvim_set_hl(0, "SnacksPickerTitle", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksPickerInput", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksPickerInputSearch", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksPickerSpinner", { fg = border_fg, bg = "NONE" })
+
   -- Treesitter context: match current line styling
   vim.api.nvim_set_hl(0, "TreesitterContext", { link = "CursorLine" })
   vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { link = "CursorLineNr" })
