@@ -24,22 +24,7 @@ return {
     },
     {
       "<leader>gg",
-      function()
-        if vim.fn.executable("lazygit") == 0 then
-          vim.notify("lazygit not found in PATH", vim.log.levels.WARN)
-          return
-        end
-        local Terminal = require("toggleterm.terminal").Terminal
-        if not vim.g._toggleterm_lazygit then
-          vim.g._toggleterm_lazygit = Terminal:new({
-            cmd = "lazygit",
-            hidden = true,
-            direction = "float",
-            close_on_exit = true,
-          })
-        end
-        vim.g._toggleterm_lazygit:toggle()
-      end,
+      "<cmd>LazyGit<cr>",
       desc = "LazyGit (float)",
     },
   },
@@ -100,5 +85,22 @@ return {
         end
       end,
     })
+
+    vim.api.nvim_create_user_command("LazyGit", function()
+      if vim.fn.executable("lazygit") == 0 then
+        vim.notify("lazygit not found in PATH", vim.log.levels.WARN)
+        return
+      end
+      local Terminal = require("toggleterm.terminal").Terminal
+      if not vim.g._toggleterm_lazygit then
+        vim.g._toggleterm_lazygit = Terminal:new({
+          cmd = "lazygit",
+          hidden = true,
+          direction = "float",
+          close_on_exit = true,
+        })
+      end
+      vim.g._toggleterm_lazygit:toggle()
+    end, { desc = "Toggle LazyGit (float)" })
   end,
 }
