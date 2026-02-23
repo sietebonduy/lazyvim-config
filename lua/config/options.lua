@@ -33,6 +33,19 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "CmdlineBorder", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "CmdlinePopupBorder", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "MsgSeparator", { fg = border_fg, bg = border_bg })
+
+  -- Noice cmdline popup
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopup", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "NoiceCmdline", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitle", { fg = border_fg, bg = border_bg })
+
+  -- Treesitter context: match current line styling
+  vim.api.nvim_set_hl(0, "TreesitterContext", { link = "CursorLine" })
+  vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { link = "CursorLineNr" })
+  vim.api.nvim_set_hl(0, "TreesitterContextBottom", { fg = border_fg, bg = "NONE" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_ui_borders })
