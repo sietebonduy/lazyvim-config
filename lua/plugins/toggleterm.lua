@@ -64,7 +64,12 @@ return {
   },
 
   config = function(_, opts)
-    require("toggleterm").setup(opts)
+    local ok, toggleterm = pcall(require, "toggleterm")
+    if not ok then
+      vim.notify("toggleterm failed to load", vim.log.levels.ERROR)
+      return
+    end
+    toggleterm.setup(opts)
 
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
     vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Terminal left" })
@@ -74,7 +79,11 @@ return {
 
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()
-        local terms = require("toggleterm.terminal").get_all()
+        local ok_term, term_mod = pcall(require, "toggleterm.terminal")
+        if not ok_term then
+          return
+        end
+        local terms = term_mod.get_all()
         for _, t in pairs(terms) do
           if t.direction == "float" and t:is_open() then
             t:resize({
@@ -91,7 +100,12 @@ return {
         vim.notify("lazygit not found in PATH", vim.log.levels.WARN)
         return
       end
-      local Terminal = require("toggleterm.terminal").Terminal
+      local ok_term, term_mod = pcall(require, "toggleterm.terminal")
+      if not ok_term then
+        vim.notify("toggleterm terminal module failed to load", vim.log.levels.ERROR)
+        return
+      end
+      local Terminal = term_mod.Terminal
       if not vim.g._toggleterm_lazygit then
         vim.g._toggleterm_lazygit = Terminal:new({
           cmd = "lazygit",
