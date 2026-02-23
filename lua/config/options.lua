@@ -10,8 +10,35 @@ vim.cmd("highlight NormalFloat guibg=none")
 
 vim.g.lazyvim_colorscheme = "moonfly"
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    vim.cmd("highlight Visual guibg=#1E1E1E guifg=NONE blend=15")
-  end,
+local function set_ui_borders()
+  vim.cmd("highlight Visual guibg=#1E1E1E guifg=NONE blend=15")
+
+  -- Consistent red borders for floating windows & common UIs
+  local border_fg = "#f49586"
+  local border_bg = "NONE"
+  vim.api.nvim_set_hl(0, "FloatBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "LspInfoBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "LspFloatWinBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "DiagnosticFloatingError", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "DiagnosticFloatingWarn", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "DiagnosticFloatingInfo", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "DiagnosticFloatingHint", { fg = border_fg, bg = border_bg })
+
+  -- ToggleTerm + cmdline styling
+  vim.api.nvim_set_hl(0, "ToggleTermBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "Cmdline", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmdlineBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "CmdlinePopupBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "MsgSeparator", { fg = border_fg, bg = border_bg })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_ui_borders })
+vim.api.nvim_create_autocmd("VimEnter", { callback = set_ui_borders })
+vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, { callback = set_ui_borders })
+vim.api.nvim_create_autocmd("User", {
+  pattern = { "LazyVimStarted", "VeryLazy" },
+  callback = set_ui_borders,
 })

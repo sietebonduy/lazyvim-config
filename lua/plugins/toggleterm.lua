@@ -1,6 +1,48 @@
 return {
   "akinsho/toggleterm.nvim",
   version = "*",
+  keys = {
+    {
+      "<leader>t",
+      "<cmd>ToggleTerm direction=float<cr>",
+      desc = "ToggleTerm float",
+    },
+    {
+      "<leader>th",
+      "<cmd>ToggleTerm direction=horizontal<cr>",
+      desc = "ToggleTerm horizontal",
+    },
+    {
+      "<leader>tv",
+      "<cmd>ToggleTerm direction=vertical<cr>",
+      desc = "ToggleTerm vertical",
+    },
+    {
+      "<leader>tt",
+      "<cmd>ToggleTerm direction=tab<cr>",
+      desc = "ToggleTerm tab",
+    },
+    {
+      "<leader>gg",
+      function()
+        if vim.fn.executable("lazygit") == 0 then
+          vim.notify("lazygit not found in PATH", vim.log.levels.WARN)
+          return
+        end
+        local Terminal = require("toggleterm.terminal").Terminal
+        if not vim.g._toggleterm_lazygit then
+          vim.g._toggleterm_lazygit = Terminal:new({
+            cmd = "lazygit",
+            hidden = true,
+            direction = "float",
+            close_on_exit = true,
+          })
+        end
+        vim.g._toggleterm_lazygit:toggle()
+      end,
+      desc = "LazyGit (float)",
+    },
+  },
 
   opts = {
     size = function(term)
@@ -11,10 +53,12 @@ return {
       end
     end,
 
-    open_mapping = nil,
+    open_mapping = [[<C-\>]],
     shade_terminals = true,
     shading_factor = 2,
     start_in_insert = true,
+    close_on_exit = true,
+    shell = vim.o.shell,
 
     direction = "float",
 
@@ -37,11 +81,11 @@ return {
   config = function(_, opts)
     require("toggleterm").setup(opts)
 
-    vim.keymap.set("n", "<leader>t", function()
-      require("toggleterm").toggle(1, nil, nil, "float")
-    end, { desc = "Floating terminal" })
-
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+    vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Terminal left" })
+    vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Terminal down" })
+    vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Terminal up" })
+    vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Terminal right" })
 
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()

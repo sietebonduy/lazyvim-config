@@ -52,7 +52,7 @@ return {
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-mini/mini.icons",
+      { "nvim-mini/mini.icons", lazy = true },
     },
   },
 }
