@@ -17,6 +17,8 @@ local function set_ui_borders()
   local border_fg = "#f49586"
   local border_bg = "NONE"
   vim.api.nvim_set_hl(0, "FloatBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "VertSplit", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
   vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = border_fg, bg = border_bg })
@@ -39,8 +41,10 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "NoiceCmdline", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitle", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = border_fg, bg = border_bg })
 
   -- Snacks windows/terminal accents
   vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "NONE" })
@@ -71,3 +75,36 @@ vim.api.nvim_create_autocmd("User", {
   pattern = { "LazyVimStarted", "VeryLazy" },
   callback = set_ui_borders,
 })
+
+-- Diagnostics UI polish
+vim.diagnostic.config({
+  severity_sort = true,
+  update_in_insert = false,
+  underline = true,
+  virtual_text = {
+    spacing = 2,
+    prefix = "●",
+  },
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+
+do
+  local signs = {
+    Error = "",
+    Warn = "",
+    Info = "",
+    Hint = "󰌵",
+  }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  end
+end
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })

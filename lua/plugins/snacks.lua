@@ -11,8 +11,10 @@ return {
           "NormalNC:NormalFloat",
           "FloatBorder:FloatBorder",
           "WinSeparator:FloatBorder",
-          "FloatTitle:FloatBorder",
-          "FloatFooter:FloatBorder",
+          "FloatTitle:SnacksTitle",
+          "FloatFooter:SnacksFooter",
+          "WinBar:SnacksWinBar",
+          "WinBarNC:SnacksWinBarNC",
         }, ","),
       },
     })
@@ -20,6 +22,7 @@ return {
     opts.terminal = opts.terminal or {}
     opts.terminal.win = vim.tbl_deep_extend("force", opts.terminal.win or {}, {
       style = "terminal",
+      wo = { winbar = "" },
     })
 
     opts.animate = opts.animate or {}
