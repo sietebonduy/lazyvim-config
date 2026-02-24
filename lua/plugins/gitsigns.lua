@@ -16,5 +16,9 @@ return {
       delay = 300,
       virt_text_pos = "right_align",
     },
+    preview_config = {
+      border = "rounded",
+      style = "minimal",
+    },
   },
 }

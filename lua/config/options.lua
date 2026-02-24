@@ -32,6 +32,7 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "DiagnosticFloatingWarn", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "DiagnosticFloatingInfo", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "DiagnosticFloatingHint", { fg = border_fg, bg = border_bg })
+  -- vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = border_fg, bg = "NONE", italic = true })
 
   -- ToggleTerm + cmdline styling
   vim.api.nvim_set_hl(0, "ToggleTermBorder", { fg = border_fg, bg = border_bg })
@@ -49,6 +50,8 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitle", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "NoiceCmdlineIconInput", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderInput", { fg = border_fg, bg = border_bg })
 
   -- Snacks windows/terminal accents
   vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "NONE" })
@@ -65,11 +68,31 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "SnacksPickerInputSearch", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "SnacksPickerTotals", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "SnacksPickerSpinner", { fg = border_fg, bg = "NONE" })
+  vim.api.nvim_set_hl(0, "SnacksInputBorder", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksInputTitle", { fg = border_fg, bg = border_bg })
+  vim.api.nvim_set_hl(0, "SnacksInputIcon", { fg = border_fg, bg = "NONE" })
 
   -- Treesitter context: match current line styling
   vim.api.nvim_set_hl(0, "TreesitterContext", { link = "CursorLine" })
   vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { link = "CursorLineNr" })
   vim.api.nvim_set_hl(0, "TreesitterContextBottom", { fg = border_fg, bg = "NONE" })
+
+  -- Keep gitsigns hunk/blame popups transparent while preserving existing fg styling.
+  for _, group in ipairs({
+    "GitSignsAddPreview",
+    "GitSignsDeletePreview",
+    "GitSignsAddInline",
+    "GitSignsDeleteInline",
+    "GitSignsNoEOLPreview",
+  }) do
+    local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+    if ok and hl then
+      hl.bg = nil
+      hl.ctermbg = nil
+      hl.blend = nil
+      vim.api.nvim_set_hl(0, group, hl)
+    end
+  end
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_ui_borders })

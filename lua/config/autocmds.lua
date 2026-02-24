@@ -41,3 +41,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, { buffer = bufnr, desc = "Line Diagnostics" })
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitsigns-blame",
+  callback = function(args)
+    local win = vim.api.nvim_get_current_win()
+    vim.wo[win].winhighlight = table.concat({
+      "Normal:NormalFloat",
+      "NormalNC:NormalFloat",
+      "CursorLine:Visual",
+      "WinBar:SnacksWinBar",
+      "WinBarNC:SnacksWinBarNC",
+      "WinSeparator:WinSeparator",
+    }, ",")
+    vim.wo[win].cursorline = true
+    vim.wo[win].number = false
+    vim.wo[win].relativenumber = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = args.buf, silent = true, desc = "Close blame window" })
+  end,
+})
