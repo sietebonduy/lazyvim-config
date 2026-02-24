@@ -2,6 +2,10 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+if vim.loader then
+  vim.loader.enable()
+end
+
 vim.o.termguicolors = true
 vim.o.grepprg = "rg --vimgrep --smart-case --hidden"
 
@@ -84,6 +88,7 @@ vim.diagnostic.config({
   virtual_text = {
     spacing = 2,
     prefix = "●",
+    current_line = true,
   },
   float = {
     border = "rounded",

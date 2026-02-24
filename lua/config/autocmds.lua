@@ -20,3 +20,24 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.supports_method and client:supports_method("textDocument/inlayHint") then
+      local ih = vim.lsp.inlay_hint
+      if ih and ih.enable then
+        ih.enable(true, { bufnr = bufnr })
+        vim.keymap.set("n", "<leader>uh", function()
+          local enabled = ih.is_enabled and ih.is_enabled({ bufnr = bufnr }) or false
+          ih.enable(not enabled, { bufnr = bufnr })
+        end, { buffer = bufnr, desc = "Toggle Inlay Hints" })
+      end
+    end
+
+    vim.keymap.set("n", "gl", function()
+      vim.diagnostic.open_float(nil, { border = "rounded", focusable = false })
+    end, { buffer = bufnr, desc = "Line Diagnostics" })
+  end,
+})

@@ -25,6 +25,52 @@ return {
       wo = { winbar = "" },
     })
 
+    opts.picker = vim.tbl_deep_extend("force", opts.picker or {}, {
+      prompt = " ",
+      show_delay = 80,
+      focus = "input",
+      limit_live = 5000,
+      layout = {
+        cycle = true,
+        preset = function()
+          return vim.o.columns >= 120 and "default" or "vertical"
+        end,
+      },
+      win = {
+        input = {
+          border = "rounded",
+          wo = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder,FloatTitle:SnacksTitle,FloatFooter:SnacksFooter",
+          },
+        },
+        list = {
+          border = "rounded",
+          wo = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          },
+        },
+        preview = {
+          border = "rounded",
+          wo = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          },
+        },
+      },
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = "left",
+          min_width = 30,
+        },
+      },
+      previewers = {
+        file = {
+          max_size = 512 * 1024,
+          max_line_length = 300,
+        },
+      },
+    })
+
     opts.animate = opts.animate or {}
   end,
 }
