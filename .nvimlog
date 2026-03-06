@@ -1,0 +1,5 @@
+WRN 2026-03-06T23:35:22.677 ?.12068    server_start:193: Failed to start server: operation not permitted: /var/folders/xd/nnv_j9f93xv98lbvjy7hqh980000gn/T/nvim.sietebonduy/M2bh0K/nvim.12068.0
+WRN 2026-03-06T23:35:35.618 ?.12134    server_start:193: Failed to start server: operation not permitted: /var/folders/xd/nnv_j9f93xv98lbvjy7hqh980000gn/T/nvim.sietebonduy/0VJplt/nvim.12134.0
+WRN 2026-03-06T23:35:44.872 ?.12196    server_start:193: Failed to start server: operation not permitted: /var/folders/xd/nnv_j9f93xv98lbvjy7hqh980000gn/T/nvim.sietebonduy/wlcaT7/nvim.12196.0
+WRN 2026-03-06T23:36:00.891 ?.12270    server_start:193: Failed to start server: operation not permitted: /var/folders/xd/nnv_j9f93xv98lbvjy7hqh980000gn/T/nvim.sietebonduy/3TVwFN/nvim.12270.0
+WRN 2026-03-06T23:55:31.743 ?.13839    server_start:193: Failed to start server: operation not permitted: /var/folders/xd/nnv_j9f93xv98lbvjy7hqh980000gn/T/nvim.sietebonduy/TxaGUJ/nvim.13839.0
