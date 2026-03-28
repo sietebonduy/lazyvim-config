@@ -34,8 +34,7 @@ local function set_ui_borders()
   vim.api.nvim_set_hl(0, "DiagnosticFloatingHint", { fg = border_fg, bg = border_bg })
   -- vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = border_fg, bg = "NONE", italic = true })
 
-  -- ToggleTerm + cmdline styling
-  vim.api.nvim_set_hl(0, "ToggleTermBorder", { fg = border_fg, bg = border_bg })
+  -- Cmdline styling
   vim.api.nvim_set_hl(0, "Cmdline", { fg = border_fg, bg = "NONE" })
   vim.api.nvim_set_hl(0, "CmdlineBorder", { fg = border_fg, bg = border_bg })
   vim.api.nvim_set_hl(0, "CmdlinePopupBorder", { fg = border_fg, bg = border_bg })
@@ -97,7 +96,6 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_ui_borders })
 vim.api.nvim_create_autocmd("VimEnter", { callback = set_ui_borders })
-vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, { callback = set_ui_borders })
 vim.api.nvim_create_autocmd("User", {
   pattern = { "LazyVimStarted", "VeryLazy" },
   callback = set_ui_borders,

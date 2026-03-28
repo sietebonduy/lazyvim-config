@@ -17,6 +17,7 @@ Only mappings with non-empty `desc` are included.
 | `<leader>E` | Explorer Snacks (cwd) | `<leader>fE` | remap |
 | `<leader>S` | Select Scratch Buffer | `<Lua callback>` | - |
 | `<leader>bP` | Delete Non-Pinned Buffers | `<Lua callback>` | expr |
+| `<leader>bj` | Pick Buffer | `<Lua callback>` | expr |
 | `<leader>bl` | Delete Buffers to the Left | `<Lua callback>` | expr |
 | `<leader>bp` | Toggle Pin | `<Lua callback>` | expr |
 | `<leader>br` | Delete Buffers to the Right | `<Lua callback>` | expr |
@@ -37,10 +38,13 @@ Only mappings with non-empty `desc` are included.
 | `<leader>fg` | Find Files (git-files) | `<Lua callback>` | expr |
 | `<leader>fr` | Recent | `<Lua callback>` | expr |
 | `<leader>gB` | Git Blame Line (Full) | `<Lua callback>` | expr |
+| `<leader>gD` | Diffview Open | `<Lua callback>` | expr |
+| `<leader>gH` | Diffview File History | `<Lua callback>` | expr |
+| `<leader>gQ` | Diffview Close | `<Lua callback>` | expr |
+| `<leader>gR` | Diffview Repo History | `<Lua callback>` | expr |
 | `<leader>gS` | Git Stash | `<Lua callback>` | expr |
 | `<leader>gc` | Commits | `<Lua callback>` | expr |
-| `<leader>gd` | Git Diff (hunks) | `<Lua callback>` | expr |
-| `<leader>gg` | LazyGit (float) | `<Lua callback>` | expr |
+| `<leader>gd` | Git Diff (files) | `<Lua callback>` | expr |
 | `<leader>gl` | Commits | `<Lua callback>` | expr |
 | `<leader>gs` | Status | `<Lua callback>` | expr |
 | `<leader>n` | Notification History | `<Lua callback>` | - |
@@ -77,14 +81,10 @@ Only mappings with non-empty `desc` are included.
 | `<leader>snl` | Noice Last Message | `<Lua callback>` | expr |
 | `<leader>snt` | Noice Picker (Telescope/FzfLua) | `<Lua callback>` | expr |
 | `<leader>sq` | Quickfix List | `<Lua callback>` | expr |
-| `<leader>sr` | Search and Replace | `<Lua callback>` | expr |
+| `<leader>sr` | Search & Replace (Spectre) | `<Lua callback>` | expr |
 | `<leader>ss` | Goto Symbol | `<Lua callback>` | expr |
 | `<leader>st` | Todo | `<Lua callback>` | expr |
 | `<leader>sw` | Word (Root Dir) | `<Lua callback>` | expr |
-| `<leader>t` | ToggleTerm float | `<Lua callback>` | expr |
-| `<leader>th` | ToggleTerm horizontal | `<Lua callback>` | expr |
-| `<leader>tt` | ToggleTerm tab | `<Lua callback>` | expr |
-| `<leader>tv` | ToggleTerm vertical | `<Lua callback>` | expr |
 | `<leader>uC` | Colorscheme with Preview | `<Lua callback>` | expr |
 | `<leader>un` | Dismiss All Notifications | `<Lua callback>` | - |
 | `<leader>xL` | Location List (Trouble) | `<Lua callback>` | expr |
@@ -150,6 +150,8 @@ Only mappings with non-empty `desc` are included.
 | `]q` | Next Trouble/Quickfix Item | `<Lua callback>` | expr |
 | `]t` | Next Todo Comment | `<Lua callback>` | expr |
 | `]y` | Cycle Backward Through Yank History | `<Lua callback>` | expr |
+| `b` | Spider B | `<Lua callback>` | expr |
+| `e` | Spider E | `<Lua callback>` | expr |
 | `gO` | vim.lsp.buf.document_symbol() | `<Lua callback>` | - |
 | `gP` | Put Text Before Selection | `<Lua callback>` | expr |
 | `gc` | Toggle comment | `<Lua callback>` | expr |
@@ -163,6 +165,7 @@ Only mappings with non-empty `desc` are included.
 | `gx` | Opens filepath or URI under cursor with the system handler (file explorer, web browser, …) | `<Lua callback>` | - |
 | `p` | Put Text After Cursor | `<Lua callback>` | expr |
 | `s` | Flash | `<Lua callback>` | expr |
+| `w` | Spider W | `<Lua callback>` | expr |
 | `y` | Yank Text | `<Lua callback>` | expr |
 
 ### Insert (`i`)
@@ -195,6 +198,8 @@ Only mappings with non-empty `desc` are included.
 | `R` | Treesitter Search | `<Lua callback>` | expr |
 | `S` | Flash Treesitter | `<Lua callback>` | expr |
 | `an` | vim.lsp.buf.selection_range(vim.v.count1) | `<Lua callback>` | - |
+| `b` | Spider B | `<Lua callback>` | expr |
+| `e` | Spider E | `<Lua callback>` | expr |
 | `gP` | Put Text Before Selection | `<Lua callback>` | expr |
 | `gc` | Toggle comment | `<Lua callback>` | expr |
 | `gp` | Put Text After Selection | `<Lua callback>` | expr |
@@ -203,6 +208,7 @@ Only mappings with non-empty `desc` are included.
 | `in` | vim.lsp.buf.selection_range(-vim.v.count1) | `<Lua callback>` | - |
 | `p` | Put Text After Cursor | `<Lua callback>` | expr |
 | `s` | Flash | `<Lua callback>` | expr |
+| `w` | Spider W | `<Lua callback>` | expr |
 | `y` | Yank Text | `<Lua callback>` | expr |
 
 ### Select (`s`)
@@ -222,9 +228,12 @@ Only mappings with non-empty `desc` are included.
 | `<C-Space>` | Treesitter Incremental Selection | `<Lua callback>` | expr |
 | `R` | Treesitter Search | `<Lua callback>` | expr |
 | `S` | Flash Treesitter | `<Lua callback>` | expr |
+| `b` | Spider B | `<Lua callback>` | expr |
+| `e` | Spider E | `<Lua callback>` | expr |
 | `gc` | Comment textobject | `<Lua callback>` | - |
 | `r` | Remote Flash | `<Lua callback>` | expr |
 | `s` | Flash | `<Lua callback>` | expr |
+| `w` | Spider W | `<Lua callback>` | expr |
 
 ### Command (`c`)
 

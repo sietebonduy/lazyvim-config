@@ -8,25 +8,18 @@
 |---|---|---|---|---|
 | `n` | `<leader>cp` | Copy project-relative file path | Копирует относительный путь текущего файла в `+` register | `lua/config/keymaps.lua` |
 | `n` | `<leader>fw` | Open file:line | Открывает `path[:line[:col]]` через input prompt | `lua/config/keymaps.lua` |
-| `n` | `<leader>t` | ToggleTerm float | Терминал во float | `lua/plugins/toggleterm.lua` |
-| `n` | `<leader>th` | ToggleTerm horizontal | Горизонтальный терминал | `lua/plugins/toggleterm.lua` |
-| `n` | `<leader>tv` | ToggleTerm vertical | Вертикальный терминал | `lua/plugins/toggleterm.lua` |
-| `n` | `<leader>tt` | ToggleTerm tab | Терминал во вкладке | `lua/plugins/toggleterm.lua` |
-| `n` | `<leader>gg` | LazyGit (float) | Открывает LazyGit во float-терминале | `lua/plugins/toggleterm.lua` |
-| `t` | `<Esc>` | Exit terminal mode | Переход в normal mode из terminal | `lua/plugins/toggleterm.lua` |
-| `t` | `<C-h>` | Terminal left | Навигация по окнам | `lua/plugins/toggleterm.lua` |
-| `t` | `<C-j>` | Terminal down | Навигация по окнам | `lua/plugins/toggleterm.lua` |
-| `t` | `<C-k>` | Terminal up | Навигация по окнам | `lua/plugins/toggleterm.lua` |
-| `t` | `<C-l>` | Terminal right | Навигация по окнам | `lua/plugins/toggleterm.lua` |
 | `n` | `<leader>gB` | Git Blame Line (Full) | Полный blame текущей строки | `lua/plugins/gitsigns.lua` |
+| `n` | `<leader>gD` | Diffview Open | Открыть diffview | `lua/plugins/workflow.lua` |
+| `n` | `<leader>gQ` | Diffview Close | Закрыть diffview | `lua/plugins/workflow.lua` |
+| `n` | `<leader>gH` | Diffview File History | История текущего файла | `lua/plugins/workflow.lua` |
+| `n` | `<leader>gR` | Diffview Repo History | История репозитория | `lua/plugins/workflow.lua` |
 | `n` | `<leader>sr` | Search & Replace (Spectre) | Открывает Spectre | `lua/plugins/spectre.lua` |
 | `n` | `<leader>uh` | Toggle Inlay Hints | Buffer-local, только при LSP с `textDocument/inlayHint` | `lua/config/autocmds.lua` |
 | `n` | `gl` | Line Diagnostics | Buffer-local при `LspAttach` | `lua/config/autocmds.lua` |
 | `n` | `q` | Close blame window | Только для `FileType=gitsigns-blame` | `lua/config/autocmds.lua` |
-
-### Extra (plugin option)
-
-- `toggleterm` `open_mapping = <C-\\>`
+| `n,o,x` | `w` | Spider W | Умный переход вперёд по словам/сегментам | `lua/plugins/workflow.lua` |
+| `n,o,x` | `e` | Spider E | Умный переход к концу слова/сегмента | `lua/plugins/workflow.lua` |
+| `n,o,x` | `b` | Spider B | Умный переход назад по словам/сегментам | `lua/plugins/workflow.lua` |
 
 ---
 
@@ -171,6 +164,5 @@ Source: `~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/lsp/init.lua`
 ### Notes about conflicts in твоём конфиге
 
 - Ты переопределяешь/дополняешь некоторые дефолты LazyVim:
-  - `<leader>gg` (у тебя LazyGit float через ToggleTerm, в LazyVim дефолте - Snacks.lazygit)
   - `<leader>gB` (у тебя full blame line, в LazyVim дефолте - git browse)
   - `<leader>uh` (у тебя буферный toggle inlay hints через `LspAttach`, в LazyVim есть глобальный toggle)

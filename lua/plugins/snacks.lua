@@ -1,6 +1,20 @@
 return {
   "snacks.nvim",
   opts = function(_, opts)
+    vim.g.snacks_animate = true
+    vim.g.snacks_scroll = true
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        vim.g.snacks_animate = true
+        vim.g.snacks_scroll = true
+        if rawget(_G, "Snacks") and Snacks.scroll and not Snacks.scroll.enabled then
+          Snacks.scroll.enable()
+        end
+      end,
+    })
+
     opts.styles = opts.styles or {}
     opts.styles.terminal = vim.tbl_deep_extend("force", opts.styles.terminal or {}, {
       border = "rounded",
@@ -72,5 +86,17 @@ return {
     })
 
     opts.animate = opts.animate or {}
+    opts.scroll = vim.tbl_deep_extend("force", opts.scroll or {}, {
+      enabled = true,
+      animate = {
+        duration = { step = 18, total = 320 },
+        easing = "outQuad",
+      },
+      animate_repeat = {
+        delay = 100,
+        duration = { step = 10, total = 120 },
+        easing = "outQuad",
+      },
+    })
   end,
 }
