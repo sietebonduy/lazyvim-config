@@ -94,9 +94,10 @@ local function set_ui_borders()
   end
 end
 
-vim.api.nvim_create_autocmd("ColorScheme", { callback = set_ui_borders })
-vim.api.nvim_create_autocmd("VimEnter", { callback = set_ui_borders })
+local ui_border_group = vim.api.nvim_create_augroup("skrach-ui-borders", { clear = true })
+vim.api.nvim_create_autocmd("ColorScheme", { group = ui_border_group, callback = set_ui_borders })
 vim.api.nvim_create_autocmd("User", {
+  group = ui_border_group,
   pattern = { "LazyVimStarted", "VeryLazy" },
   callback = set_ui_borders,
 })

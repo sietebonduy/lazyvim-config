@@ -7,6 +7,19 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+local function toggle_inlay_hints(bufnr)
+  local ih = vim.lsp.inlay_hint
+  if not (ih and ih.enable) then
+    return
+  end
+  local enabled = ih.is_enabled and ih.is_enabled({ bufnr = bufnr }) or false
+  ih.enable(not enabled, { bufnr = bufnr })
+end
+
+vim.keymap.set("n", "<leader>uh", function()
+  toggle_inlay_hints(0)
+end, { desc = "Toggle Inlay Hints" })
+
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "moonfly",
   callback = function()
@@ -29,10 +42,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       local ih = vim.lsp.inlay_hint
       if ih and ih.enable then
         ih.enable(true, { bufnr = bufnr })
-        vim.keymap.set("n", "<leader>uh", function()
-          local enabled = ih.is_enabled and ih.is_enabled({ bufnr = bufnr }) or false
-          ih.enable(not enabled, { bufnr = bufnr })
-        end, { buffer = bufnr, desc = "Toggle Inlay Hints" })
       end
     end
 

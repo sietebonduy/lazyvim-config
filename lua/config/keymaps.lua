@@ -24,10 +24,6 @@ vim.keymap.set("n", "<leader>cp", function()
   vim.fn.setreg("+", rel)
   vim.notify("Copied: " .. rel, vim.log.levels.INFO)
 end, { desc = "Copy project-relative file path" })
-
-vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#f49586" })
-vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = "#f49586" })
-
 vim.keymap.set("n", "<leader>fw", function()
   vim.ui.input({ prompt = "Open file:line " }, function(input)
     if not input or input == "" then
