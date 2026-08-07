@@ -4,11 +4,10 @@ return {
     name = "moonfly",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.g.moonflyTransparent = true -- если нужен прозрачный фон
-      vim.g.moonflyItalics = true -- курсив
-      vim.g.moonflyCursorColor = true -- цветной курсор
-      vim.cmd.colorscheme("moonfly")
+    init = function()
+      vim.g.moonflyTransparent = true
+      vim.g.moonflyItalics = true
+      vim.g.moonflyCursorColor = true
     end,
   },
   { "folke/tokyonight.nvim", enabled = false },

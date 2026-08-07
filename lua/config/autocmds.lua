@@ -7,51 +7,19 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
-local function toggle_inlay_hints(bufnr)
-  local ih = vim.lsp.inlay_hint
-  if not (ih and ih.enable) then
-    return
-  end
-  local enabled = ih.is_enabled and ih.is_enabled({ bufnr = bufnr }) or false
-  ih.enable(not enabled, { bufnr = bufnr })
-end
-
-vim.keymap.set("n", "<leader>uh", function()
-  toggle_inlay_hints(0)
-end, { desc = "Toggle Inlay Hints" })
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "moonfly",
-  callback = function()
-    -- статуслайн / globalstatus
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
-
-    -- lualine
-    for _, mode in ipairs({ "normal", "insert", "visual", "replace", "inactive" }) do
-      vim.api.nvim_set_hl(0, "lualine_c_" .. mode, { bg = "NONE" })
-    end
-  end,
-})
+local group = vim.api.nvim_create_augroup("skrach_autocmds", { clear = true })
 
 vim.api.nvim_create_autocmd("LspAttach", {
+  group = group,
   callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.supports_method and client:supports_method("textDocument/inlayHint") then
-      local ih = vim.lsp.inlay_hint
-      if ih and ih.enable then
-        ih.enable(true, { bufnr = bufnr })
-      end
-    end
-
     vim.keymap.set("n", "gl", function()
       vim.diagnostic.open_float(nil, { border = "rounded", focusable = false })
-    end, { buffer = bufnr, desc = "Line Diagnostics" })
+    end, { buffer = args.buf, desc = "Line Diagnostics" })
   end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = group,
   pattern = "gitsigns-blame",
   callback = function(args)
     local win = vim.api.nvim_get_current_win()
@@ -67,5 +35,14 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo[win].number = false
     vim.wo[win].relativenumber = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = args.buf, silent = true, desc = "Close blame window" })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = group,
+  pattern = { "asciidoc", "mail", "norg", "org", "rst" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
   end,
 })
